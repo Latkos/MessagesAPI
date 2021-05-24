@@ -20,7 +20,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from messager import views
 router = DefaultRouter()
-router.register(r'messages', views.MessageListViewSet)
+router.register(r'messages', views.MessageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

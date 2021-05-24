@@ -7,7 +7,7 @@ from messager.models import Message
 from messager.serializers import MessageListSerializer, MessageSerializer
 
 
-class MessageListViewSet(viewsets.ModelViewSet):
+class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageListSerializer
 
@@ -30,13 +30,3 @@ class MessageListViewSet(viewsets.ModelViewSet):
         except Http404:
             pass
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def create(self, request, *args, **kwargs):
-        serializer = MessageSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    def perform_create(self, serializer):
-        serializer.save()
