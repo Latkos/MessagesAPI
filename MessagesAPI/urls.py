@@ -19,9 +19,12 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from messager import views
+
 router = DefaultRouter()
 router.register(r'messages', views.MessageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')),
+    path('admin/', admin.site.urls),
 ]
