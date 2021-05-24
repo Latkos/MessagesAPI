@@ -8,10 +8,12 @@ class MessageListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Message
-        fields = ['title', 'url','view_counter']
+        fields = ['title', 'url', 'view_counter']
+        read_only_fields = ['view_counter']
 
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ['title', 'content', 'view_counter']
+        read_only_fields = ['view_counter']
