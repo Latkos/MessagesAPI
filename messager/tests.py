@@ -87,7 +87,7 @@ class Tests:
         data = response.data
         assert (data['title'] == 'title1')
         assert (data['content'] == 'content1')
-        assert (data['view_counter'] == 0)
+        assert (data['view_counter'] == 1)
         # we should be able to retrieve message details without authentication
 
     @pytest.mark.django_db
