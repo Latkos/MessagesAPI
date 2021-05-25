@@ -15,7 +15,6 @@ class MessageViewSet(viewsets.ModelViewSet):
         if self.action in ['retrieve', 'update', 'create']:  # the 2 serializers differ since in list there's url field
             # and in message detail there's content field instead
             return MessageSerializer
-        print(self.action)
         return MessageListSerializer
 
     def retrieve(self, request, *args, **kwargs):  # overloaded to be able update the view counter

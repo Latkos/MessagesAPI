@@ -20,7 +20,7 @@ from rest_framework.routers import DefaultRouter
 from messager import views
 
 router = DefaultRouter()
-router.register(r'', views.MessageViewSet)
+router.register(r'messages', views.MessageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
