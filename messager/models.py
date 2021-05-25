@@ -7,8 +7,14 @@ class Message(models.Model):
     content = models.CharField(max_length=160)
     view_counter = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
-    # every time message is updated, reset the view counter
+    def __init__(self, *args, **kwargs): # we need to store the earlier title and content to see if it changed
+        super(Message, self).__init__(*args, **kwargs)
+        self.__original_title = self.title
+        self.__original_content = self.content
+
     def save(self, **kwargs):
-        self.view_counter = 0
-        self.full_clean()
+        if self.title != self.__original_title or self.content != self.__original_content: # if we changed the message
+            # we need to reset the view counter
+            self.view_counter = 0
+        self.full_clean() # to enforce the character limit even in SQLite
         super().save(**kwargs)

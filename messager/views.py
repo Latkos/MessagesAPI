@@ -19,6 +19,7 @@ class MessageViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):  # overloaded to be able update the view counter
         instance = self.get_object()
-        Message.objects.filter(pk=instance.id).update(view_counter=F('view_counter') + 1)
+        instance.view_counter=instance.view_counter+1
+        instance.save()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
